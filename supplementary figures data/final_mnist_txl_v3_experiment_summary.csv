@@ -1,0 +1,4 @@
+phase,accuracy,balanced_accuracy,macro_f1,n_txl_rows,n_txl_cells,resistance_clipping_rate,ood_auroc,new_class_accuracy,forgetting
+baseline_known_digits,0.891,0.891,0.8907311938603673,5,245,0.0,,,
+after_existing_digit_adaptation,0.876,0.876,0.8756707967057501,5,245,0.0,0.731285,,
+post_new_digit_allocation,0.855,0.855,0.8550427997684124,6,294,0.0,,0.775,0.0050000000000000044

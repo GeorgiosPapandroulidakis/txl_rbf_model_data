@@ -1,0 +1,5 @@
+event,label,class_name,n_samples,n_classes,n_cells_total,sigma_clip_low_count,sigma_clip_high_count,R_M1_clipped_count,R_M2_clipped_count,mode,adapt_ratio,n_support,mean_abs_mu_shift_feature,mean_abs_sigma_shift_feature,mean_abs_R_M1_shift_ohm,mean_abs_R_M2_shift_ohm
+fit,0,Cross,120.0,1.0,25.0,0.0,7.0,0.0,0.0,,,,,,,
+fit,1,Circle,120.0,2.0,50.0,0.0,6.0,0.0,0.0,,,,,,,
+fit,2,Triangle,120.0,3.0,75.0,0.0,5.0,0.0,0.0,,,,,,,
+adapt_class,1,Circle,,,,,,,,pooled_ema,0.5,5.0,0.05193322838890859,0.07755400336334911,3357.856718206049,3335.6796220318715

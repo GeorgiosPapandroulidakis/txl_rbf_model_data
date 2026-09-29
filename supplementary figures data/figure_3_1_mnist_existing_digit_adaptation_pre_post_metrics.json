@@ -1,0 +1,23 @@
+{
+  "target_label": 2,
+  "target_class_name": "Digit 2",
+  "pre_d2": 63.53328771711145,
+  "post_d2": 44.506690086041026,
+  "d2_reduction": 19.026597631070423,
+  "pre_N_hat": 0.7618659222112876,
+  "post_N_hat": 0.7675280529588511,
+  "N_hat_increase": 0.0056621307475634985,
+  "pre_I_ML": 0.0007466286037670618,
+  "post_I_ML": 0.000752177491899674,
+  "I_ML_increase": 5.548888132612235e-06,
+  "pre_status": "IDO",
+  "post_status": "RELIABLE",
+  "mean_abs_mu_shift_v": 0.01843126633557578,
+  "max_abs_mu_shift_v": 0.10067708740674286,
+  "mean_abs_sigma_shift_v": 0.0098498157919236,
+  "max_abs_sigma_shift_v": 0.045494681776794,
+  "mean_abs_R_M1_update_ohm": 1228.551037100611,
+  "mean_abs_R_M2_update_ohm": 2128.6576137603033,
+  "max_abs_R_M1_update_ohm": 7688.3549454579115,
+  "max_abs_R_M2_update_ohm": 7826.8357869474785
+}

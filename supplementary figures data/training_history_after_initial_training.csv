@@ -1,0 +1,6 @@
+event,label,class_name,n_samples,n_classes,n_cells_total,sigma_clip_low_count,sigma_clip_high_count,R_M1_clipped_count,R_M2_clipped_count
+fit,0,Digit 0,500,1,49,21,11,0,0
+fit,1,Digit 1,500,2,98,29,5,0,0
+fit,2,Digit 2,500,3,147,19,13,0,0
+fit,3,Digit 3,500,4,196,19,3,0,0
+fit,4,Digit 4,500,5,245,21,5,0,0

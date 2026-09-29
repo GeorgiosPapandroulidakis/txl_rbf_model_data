@@ -1,0 +1,4 @@
+phase,accuracy,balanced_accuracy,macro_f1,n_txl_rows,n_txl_cells,ood_auroc,new_class_accuracy,forgetting
+baseline_known_classes,1.0,1.0,1.0,3,75,,,
+after_existing_class_adaptation,1.0,1.0,1.0,3,75,1.0,,
+post_new_class_allocation,1.0,1.0,1.0,4,100,,1.0,0.0

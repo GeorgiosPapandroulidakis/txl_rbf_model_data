@@ -1,0 +1,12 @@
+{
+  "accuracy": 1.0,
+  "balanced_accuracy": 1.0,
+  "n_samples": 415,
+  "n_classes": 4,
+  "labels": [
+    0,
+    1,
+    2,
+    3
+  ]
+}

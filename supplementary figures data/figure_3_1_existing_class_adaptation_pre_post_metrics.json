@@ -1,0 +1,23 @@
+{
+  "target_label": 1,
+  "target_class_name": "Circle",
+  "pre_d2": 37.67749915360378,
+  "post_d2": 24.49203610306581,
+  "d2_reduction": 13.185463050537972,
+  "pre_N_hat": 0.8079746871135436,
+  "post_N_hat": 0.7954796558991429,
+  "N_hat_increase": -0.012495031214400654,
+  "pre_I_ML": 0.0013331582337373468,
+  "post_I_ML": 0.001312541432233586,
+  "I_ML_increase": -2.0616801503760924e-05,
+  "pre_status": "IDO",
+  "post_status": "RELIABLE",
+  "mean_abs_mu_shift_v": 0.03635325987223599,
+  "max_abs_mu_shift_v": 0.10408299829810841,
+  "mean_abs_sigma_shift_v": 0.024811672279284634,
+  "max_abs_sigma_shift_v": 0.04994463177082309,
+  "mean_abs_R_M1_update_ohm": 3357.856718206049,
+  "mean_abs_R_M2_update_ohm": 3335.6796220318715,
+  "max_abs_R_M1_update_ohm": 10260.995218951022,
+  "max_abs_R_M2_update_ohm": 6454.9449003423215
+}

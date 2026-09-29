@@ -1,0 +1,13 @@
+{
+  "accuracy": 0.891,
+  "balanced_accuracy": 0.891,
+  "n_samples": 1000,
+  "n_correct": 891,
+  "tau_IDO": 62.03753678530966,
+  "tau_OOD": 85.35056460859305,
+  "status_counts": {
+    "RELIABLE": 905,
+    "OOD": 50,
+    "IDO": 45
+  }
+}

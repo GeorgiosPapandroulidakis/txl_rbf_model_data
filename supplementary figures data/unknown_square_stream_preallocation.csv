@@ -1,0 +1,6 @@
+stream_index,pred_label,pred_class_name,status,status_legacy,best_d2,best_N_hat,best_I_ML,winner_by_nhat,winner_by_d2,winner_agreement,ood_vote_count,unknown_trigger_threshold,unknown_stream_triggered
+0,1,Circle,OOD,OOD,259.6422865390518,0.31799992187208037,0.0005246998710889326,1,0,False,5,3,True
+1,1,Circle,OOD,OOD,221.6052626899554,0.3808549612027704,0.0006284106859845712,1,0,False,5,3,True
+2,1,Circle,OOD,OOD,269.9593844345092,0.33287081347357095,0.0005492368422313921,1,2,False,5,3,True
+3,0,Cross,OOD,OOD,182.30189040371513,0.38119831657202313,0.0006289772223438382,0,0,True,5,3,True
+4,1,Circle,OOD,OOD,249.22558718579904,0.402774014257489,0.0006645771235248569,1,0,False,5,3,True
