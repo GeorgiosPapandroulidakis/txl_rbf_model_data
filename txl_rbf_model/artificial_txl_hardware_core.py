@@ -2,14 +2,6 @@
 """
 artificial_txl_hardware_core.py
 
-Step 1 core integration for the artificial-symbol TXL experiment.
-
-Purpose
--------
-This module reuses the artificial 5x5 shape dataset framework from the older
-test script, but replaces the simplified high-level TXL classifier with a
-hardware-grounded model based on txl_model_v3.py.
-
 Included in this step
 ---------------------
 1. Artificial dataset generation:
@@ -33,12 +25,6 @@ Included in this step
    - Normalized match score
    - Hardware/statistical winner-take-all options
    - Reliable / unreliable / OOD zone decision
-
-Not included in this step
--------------------------
-- Plotting functions
-- Full experiment execution script
-- Final benchmark metrics/report generation
 """
 
 from __future__ import annotations
@@ -53,7 +39,7 @@ import pandas as pd
 
 
 # ---------------------------------------------------------------------
-# Optional PyTorch support, to preserve compatibility with the old script
+# Optional PyTorch support
 # ---------------------------------------------------------------------
 try:
     import torch
@@ -63,15 +49,6 @@ except Exception:  # pragma: no cover
     Dataset = object
 
 
-# ---------------------------------------------------------------------
-# Hardware-grounded TXL model (v4)
-# ---------------------------------------------------------------------
-# HW, TXLCell, TXLArray, and the core equations (txl_encode, txl_decode,
-# txl_window_v4, txl_I_ML, txl_N_hat, txl_d2_tilde) are defined in the
-# core-model cell above this one in the notebook and are already in scope
-# here -- no import needed within a single notebook kernel.
-
-
 # =====================================================================
 # 1. GLOBAL ARTIFICIAL-DATA CONFIGURATION
 # =====================================================================
@@ -79,22 +56,17 @@ except Exception:  # pragma: no cover
 FEATURE_MAP_SIDE: int = 5
 FEATURE_MAP_DIM: int = FEATURE_MAP_SIDE * FEATURE_MAP_SIDE
 
-# Keep the older test-script voltage range for continuity.
 V_MIN: float = 0.1
 V_MAX: float = 0.8
 
-# Default confidence values matching the older artificial test.
 DEFAULT_IDO_CONFIDENCE: float = 0.95
 DEFAULT_OOD_CONFIDENCE: float = 0.999
 
-# Default few-shot/adaptation parameters.
 DEFAULT_N_SHOTS: int = 5
 DEFAULT_ADAPT_RATIO: float = 0.5
 
-# Known classes used in the original artificial test.
 KNOWN_CLASSES: List[int] = [0, 1, 2]
 
-# Use "Circle" rather than the old typo "Cycle".
 CLASS_NAMES: Dict[int, str] = {
     0: "Cross",
     1: "Circle",
@@ -987,8 +959,7 @@ class HardwareTXLClassifier:
         self.center_shift = float(center_shift)
 
         # If True, tau_IDO/tau_OOD are set by empirical calibration (SEC 5 of
-        # the core model) rather than the theoretical chi2 reference -- see
-        # the migration notes markdown cell for why this matters.
+        # the core model) rather than the theoretical chi2 reference
         self.calibrate_thresholds_flag = bool(calibrate_thresholds)
 
         if winner_rule not in {"max_nhat", "min_d2"}:
@@ -1123,11 +1094,6 @@ class HardwareTXLClassifier:
         array = self._stats_to_array(stats)
 
         if self.calibrate_thresholds_flag:
-            # Empirical calibration (TXLArray.calibrate_thresholds, core
-            # model SEC 5): tau_IDO/tau_OOD are set from percentiles of this
-            # row's own d2_tilde distribution over the samples it was just
-            # fit on, rather than a theoretical chi2 reference. See the
-            # migration notes markdown for why this matters in practice.
             X_v_calib = feature_to_voltage(
                 validate_feature_matrix(X_class, dim=self.dim, dtype=np.float64),
                 v_min=self.v_min, v_max=self.v_max, clip=True,
@@ -1289,7 +1255,6 @@ class HardwareTXLClassifier:
         new_mu = (1.0 - adapt_ratio) * old.mu_x + adapt_ratio * support_mu
 
         if mode == "pooled_ema":
-            # Approximate variance blend with between-mean correction.
             old_var = old.sigma_x_raw ** 2
             support_var = support_sigma ** 2
 
@@ -1328,10 +1293,6 @@ class HardwareTXLClassifier:
         pre_R_M1 = old.R_M1.copy()
         pre_R_M2 = old.R_M2.copy()
 
-        # Preserve this row's calibrated tau_IDO/tau_OOD across the rebuild:
-        # adaptation is a small nudge to an already-calibrated row, not a
-        # fresh fit, so we carry the existing empirical thresholds forward
-        # rather than resetting to the theoretical chi2 default.
         old_tau_IDO = self.arrays_[label].tau_IDO
         old_tau_OOD = self.arrays_[label].tau_OOD
 
@@ -1843,9 +1804,6 @@ def find_edge_outliers(
         d2_val = array.d2(feat_v)
 
         lower = array.tau_IDO * distance_low_factor
-        # Cap at tau_OOD so "edge outlier" (IDO-band) candidates can never
-        # actually be true OOD samples -- matches find_mnist_edge_samples()
-        # in the MNIST notebook, which already enforces this bound.
         upper = min(array.tau_IDO * distance_high_factor, array.tau_OOD)
 
         if lower < d2_val < upper:

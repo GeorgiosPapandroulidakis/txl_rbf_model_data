@@ -17,7 +17,7 @@ import matplotlib.gridspec as gridspec
 from scipy.stats import chi2
 
 # ─────────────────────────────────────────────────────────────────────────────
-# SEC 0  HARDWARE CONSTANTS  (unchanged from v3)
+# SEC 0  HARDWARE CONSTANTS
 # ─────────────────────────────────────────────────────────────────────────────
 
 HW: Dict = dict(
@@ -54,7 +54,7 @@ _C = dict(
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
-# SEC 1  CORE THRESHOLD / ENCODE / DECODE EQUATIONS  (unchanged from v3)
+# SEC 1  CORE THRESHOLD / ENCODE / DECODE EQUATIONS
 # ─────────────────────────────────────────────────────────────────────────────
 
 def txl_V_TH(R_M, R_B=None, hw=HW):
@@ -82,7 +82,7 @@ def txl_decode(R_M1, R_M2, hw=HW):
     return (V_hi + V_lo)/2.0, (V_hi - V_lo)/2.0
 
 # ─────────────────────────────────────────────────────────────────────────────
-# SEC 2  CELL RESPONSE  --  v4 parametric double-sigmoid matching window
+# SEC 2  CELL RESPONSE  --  parametric double-sigmoid matching window
 # ─────────────────────────────────────────────────────────────────────────────
 #
 #   sigma_eff = w_scale * sigma
@@ -91,12 +91,6 @@ def txl_decode(R_M1, R_M2, hw=HW):
 #   k_lo      = k_edge_lo / sigma_eff
 #   k_hi      = k_edge_hi / sigma_eff
 #   g(x)      = sigmoid(k_lo*(x - V_lo_eff)) * sigmoid(k_hi*(V_hi_eff - x))
-#
-# mu, sigma come from txl_decode (SEC 1) -- the SAME quantities v3 uses.
-# k_edge_lo/hi (steepness), w_scale (width) and center_shift (placement) are
-# the only new parameters; none require SPICE or any other external data --
-# they are analytical fit knobs, defaulted here and swept empirically in the
-# main experiment script to find values suited to this dataset.
 
 def _sigmoid(z):
     z = np.clip(np.asarray(z, float), -60.0, 60.0)
@@ -280,10 +274,6 @@ class TXLArray:
         """ similarity-derived distance used for reliability zoning."""
         return float(txl_d2_tilde(self.N_hat(x_vec), self.D))
 
-    # Backward-compatible alias: existing code (inference_full, viz, audits)
-    # calls array.d2(x_vec) expecting the value used inside zone(). Under v4
-    # this IS d2_tilde -- the legacy independent Mahalanobis^2 is available
-    # separately as d2_legacy() for explicit ablation use only.
     def d2(self, x_vec) -> float:
         return self.d2_tilde(x_vec)
 

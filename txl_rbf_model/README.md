@@ -1,8 +1,8 @@
 # TXL-ACAM v4 Model — Implementation Notes
 
 This document describes the TXL-ACAM (RRAM-CMOS crossbar) model as implemented in
-`txl_model_v4.py` and consumed by `HardwareTXLClassifier`
-(`artificial_txl_hardware_core.py`). It covers the hardware constants, the
+`txl_model_v4.py` and used by `HardwareTXLClassifier`
+(as found in `artificial_txl_hardware_core.py`). It covers the hardware constants, the
 threshold/encode/decode equations, the per-cell matching-window response, the
 matchline (row-level) equations, the `TXLCell` / `TXLArray` classes, and the
 classifier that wraps them.
@@ -198,7 +198,7 @@ Thresholds can be set two ways:
 - **Theoretical.** $\tau_{IDO} = \chi^2_{P_{IDO}}(D)$, $\tau_{OOD} =
   \chi^2_{P_{OOD}}(D)$ — the standard chi-squared quantiles for $D$ degrees of
   freedom, computed once when the row (`TXLArray`) is built.
-- **Empirically calibrated.** `TXLArray.calibrate_thresholds(X_calib)`
+- **Calibrated.** `TXLArray.calibrate_thresholds(X_calib)`
   replaces both thresholds with percentiles of that row's own $\tilde{d}^2$
   distribution, evaluated over a calibration sample:
   $$
